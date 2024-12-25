@@ -1,4 +1,4 @@
-from Contact import Contact
+from .Contact import Contact
 
 from typing import Optional
 
