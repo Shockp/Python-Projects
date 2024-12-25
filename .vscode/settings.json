@@ -1,7 +1,0 @@
-{
-    "python.testing.pytestArgs": [
-        "SimpleContactManagementSystem"
-    ],
-    "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
-}
