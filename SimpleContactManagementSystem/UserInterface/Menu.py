@@ -48,12 +48,7 @@ class Menu:
             name = input("Enter new name: ")
             phone = input("Enter new phone: ")
             email = input("Enter new email: ")
-            
-            existing_contact = self.contact_list.search_contact(phone)
-            if existing_contact:
-                print("Phone number already in use.")
-            else:
-                self.contact_list.update_contact(contact, Contact(name, phone, email))
+            self.contact_list.update_contact(contact, Contact(name, phone, email))
         else:
             print("Contact not found")
                 
@@ -61,7 +56,7 @@ class Menu:
         print("Contacts:\n")
         print(self.contact_list)
     
-    def search_contact(self, phone: str) -> Optional[Contact]:
+    def search_contact(self) -> Optional[Contact]:
         phone = input("Enter phone number to search: ")
         contact = self.contact_list.search_contact(phone)
         if contact:
