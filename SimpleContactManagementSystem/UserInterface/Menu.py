@@ -1,8 +1,11 @@
+from ContactManagement.Contact import Contact
 from ContactManagement.ContactList import ContactList
+
+from typing import Optional
 
 class Menu:
     def __init__(self):
-        self.contact_list = ContactList(set())
+        self.contact_list = ContactList()
     
     @property
     def contact_list(self) -> ContactList:
@@ -27,35 +30,42 @@ class Menu:
         name = input("Enter name: ")
         phone = input("Enter phone: ")
         email = input("Enter email: ")
-        self.contact_list.add_contact(name, phone, email)
+        contact = Contact(name, phone, email)
+        self.contact_list.add_contact(contact)
     
     def remove_contact(self):
-        number = input("Enter number to remove: ")
-        contact = self.contact_list.search_contact(number)
+        phone = input("Enter phone to remove: ")
+        contact = self.contact_list.search_contact(phone)
         if contact:
-            self.contact_list.remove_contact(number)
+            self.contact_list.remove_contact(contact)
         else:
             print("Contact not found")
             
     def update_contact(self):
-        number = input("Enter number to update: ")
-        contact = self.contact_list.search_contact(number)
+        phone = input("Enter phone number to update: ")
+        contact = self.contact_list.search_contact(phone)
         if contact:
             name = input("Enter new name: ")
             phone = input("Enter new phone: ")
             email = input("Enter new email: ")
-            self.contact_list.update_contact(number, name, phone, email)
+            
+            existing_contact = self.contact_list.search_contact(phone)
+            if existing_contact:
+                print("Phone number already in use.")
+            else:
+                self.contact_list.update_contact(contact, Contact(name, phone, email))
         else:
             print("Contact not found")
-    
+                
     def view_contacts(self):
+        print("Contacts:\n")
         print(self.contact_list)
     
-    def search_contact(self):
-        number = input("Enter number: ")
-        contact = self.contact_list.search_contact(number)
+    def search_contact(self, phone: str) -> Optional[Contact]:
+        phone = input("Enter phone number to search: ")
+        contact = self.contact_list.search_contact(phone)
         if contact:
-            print(f"Name: {contact.name}\nPhone: {contact.phone}\nEmail: {contact.email}\n")
+            print(contact)
         else:
             print("Contact not found")
             
@@ -74,6 +84,7 @@ class Menu:
             elif choice == "5":
                 self.search_contact()
             elif choice == "6":
+                print("Exiting program.")
                 break
             else:
-                print("Invalid choice")
+                print("Invalid choice, please try again.")

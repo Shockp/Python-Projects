@@ -36,7 +36,7 @@ class Contact:
             raise ValueError("Invalid email address. Example: example@domain.com")
         self._email = value
         
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, str]:
         return {"name": self.name, "phone": self.phone, "email": self.email}
     
     def __str__(self) -> str:
@@ -44,5 +44,5 @@ class Contact:
     
     def __eq__(self, other) -> bool:
         if isinstance(other, Contact):
-            return self.number == other.number
+            return self.phone == other.phone
         return False
