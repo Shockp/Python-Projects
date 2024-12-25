@@ -35,3 +35,14 @@ class Contact:
         if not re.match("^[^@]+@[^@]+\.[^@]+$", value):
             raise ValueError("Invalid email address. Example: example@domain.com")
         self._email = value
+        
+    def to_dict(self) -> dict:
+        return {"name": self.name, "phone": self.phone, "email": self.email}
+    
+    def __str__(self) -> str:
+        return f"Name: {self.name}\nPhone: {self.phone}\nEmail: {self.email}\n"
+    
+    def __eq__(self, other) -> bool:
+        if isinstance(other, Contact):
+            return self.number == other.number
+        return False

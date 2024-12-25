@@ -47,3 +47,9 @@ class ContactList:
                 return contact
         print("Contact not found")
         return None
+    
+    def to_list_of_dicts(self) -> list[dict]:
+        return [Contact.to_dict() for contact in self.contacts]
+    
+    def __str__(self) -> str:
+        return "\n".join(str(contact) for contact in self.contacts)
